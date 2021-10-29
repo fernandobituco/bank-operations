@@ -15,7 +15,7 @@ namespace bankOperations
                 switch (userOption)
                 {
                     case "1":
-                        //ShowAccounts();
+                        ShowAccounts();
                         break;
                     case "2":
                         createAccount();
@@ -35,6 +35,7 @@ namespace bankOperations
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+                userOption = getUserOption();
             }
 
             Console.WriteLine("Thank you for using our services");           
@@ -55,7 +56,23 @@ namespace bankOperations
             string userOption = Console.ReadLine().ToUpper();
             Console.WriteLine();
             return userOption;
-        }  
+        }
+
+        private static void ShowAccounts()
+        {
+            Console.WriteLine("Show accounts: ");
+            if (listAccounts.Count == 0)
+            {
+                Console.WriteLine("There are no accounts yet");
+                return;
+            }
+            for (int i = 0; i < listAccounts.Count; i++)
+            {
+                Account account = listAccounts[i];
+                Console.WriteLine("#{0} - {1}", i, account);
+                Console.WriteLine();
+            }
+        }
 
         private static void createAccount()
         {
@@ -83,6 +100,9 @@ namespace bankOperations
                                                             credit: newCredit);
             
             listAccounts.Add(newAccount);
+
+            Console.WriteLine("Account created");
+            Console.WriteLine();
         }   
     }
 }
