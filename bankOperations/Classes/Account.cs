@@ -64,6 +64,11 @@ namespace bankOperations
             else
                 return false;
         }
+
+        public string returnName()
+        {
+            return this.Name;
+        }
     }
 
 }

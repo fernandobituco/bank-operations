@@ -24,10 +24,10 @@ namespace bankOperations
                         Deposit();
                         break;
                     case "4":
-                        //Withdraw();
+                        Withdraw();
                         break;
                     case "5":
-                        //Transfer();
+                        Transfer();
                         break;
                     case "C":
                         Console.Clear();
@@ -114,6 +114,64 @@ namespace bankOperations
             double depositValue = int.Parse(Console.ReadLine());
             
             listAccounts[acc].deposit(depositValue);
+        }
+
+        private static void Withdraw()
+        {
+            Console.WriteLine("Select the account you wish to withdraw from");
+            int acc = int.Parse(Console.ReadLine());
+            string tryPassword;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Type the password for {0}'s account", listAccounts[acc].returnName());
+                tryPassword = Console.ReadLine();
+                if (listAccounts[acc].checkPassword(tryPassword))
+                {
+                    Console.WriteLine("Type the value you wish to withdraw");
+                    double withdrawValue = double.Parse(Console.ReadLine());
+                    listAccounts[acc].withdraw(withdrawValue);
+                    return;
+                }
+                else
+                    Console.WriteLine("Incorrect password, please try again");
+                    Console.WriteLine("");
+            }
+
+            Console.WriteLine("3 times incorrect password. Check your data and try again later");
+            Console.WriteLine("");
+        }
+
+        private static void Transfer()
+        {
+            Console.WriteLine("Select the account you wish to transfer from");
+            int accOrigin = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Select the account you wish to transfer to");
+            int accFinal = int.Parse(Console.ReadLine());
+
+            string tryPassword;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Type the password for {0}'s account", listAccounts[accOrigin].returnName());
+                tryPassword = Console.ReadLine();
+                if (listAccounts[accOrigin].checkPassword(tryPassword))
+                {
+                    Console.WriteLine("Type the value you wish to transfer");
+                    double transferValue = double.Parse(Console.ReadLine());
+                    listAccounts[accOrigin].transfer(transferValue, listAccounts[accFinal]);
+                    return;
+                }
+                else
+                    Console.WriteLine("Incorrect password, please try again");
+                    Console.WriteLine("");
+            }
+
+            Console.WriteLine("3 times incorrect password. Check your data and try again later");
+            Console.WriteLine("");
+
+            
         }
     }
 }
