@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace bankOperations
 {
     class Program
     {
+        static List<Account> listAccounts = new List<Account>();
         static void Main(string[] args)
         {
             string userOption = getUserOption();
@@ -16,7 +18,7 @@ namespace bankOperations
                         //ShowAccounts();
                         break;
                     case "2":
-                        //createAccount();
+                        createAccount();
                         break;
                     case "3":
                         //Transfer();
@@ -35,8 +37,7 @@ namespace bankOperations
                 }
             }
 
-            Console.WriteLine("Thank you for using our services");
-            
+            Console.WriteLine("Thank you for using our services");           
         }
 
         private static string getUserOption ()
@@ -54,7 +55,34 @@ namespace bankOperations
             string userOption = Console.ReadLine().ToUpper();
             Console.WriteLine();
             return userOption;
+        }  
 
-        }
+        private static void createAccount()
+        {
+            Console.WriteLine("Create new account");
+
+            Console.WriteLine("Type 1 for checking account or 2 for savings account");
+            int newAccountType = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Type the client's name");
+            string newName = Console.ReadLine();
+
+            Console.WriteLine("Type the password");
+            string newPassword = Console.ReadLine();
+
+            Console.WriteLine("Type the inicial balance");
+            double newBalance = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("Type the credit");
+            double newCredit = double.Parse(Console.ReadLine());
+
+            Account newAccount = new Account(accountType: (Type)newAccountType, 
+                                                            name: newName,
+                                                            password: newPassword,
+                                                            balance: newBalance,
+                                                            credit: newCredit);
+            
+            listAccounts.Add(newAccount);
+        }   
     }
 }
