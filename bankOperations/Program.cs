@@ -18,16 +18,16 @@ namespace bankOperations
                         ShowAccounts();
                         break;
                     case "2":
-                        createAccount();
+                        CreateAccount();
                         break;
                     case "3":
-                        //Transfer();
+                        Deposit();
                         break;
                     case "4":
                         //Withdraw();
                         break;
                     case "5":
-                        //Deposit();
+                        //Transfer();
                         break;
                     case "C":
                         Console.Clear();
@@ -46,9 +46,9 @@ namespace bankOperations
             Console.WriteLine("Select the option you wish");
             Console.WriteLine("1 - Show accounts");
             Console.WriteLine("2 - Create new account");
-            Console.WriteLine("3 - Transfer");
+            Console.WriteLine("3 - Deposit");
             Console.WriteLine("4 - Withdraw");
-            Console.WriteLine("5 - Deposit");
+            Console.WriteLine("5 - Transfer");
             Console.WriteLine("C - clear screen");
             Console.WriteLine("X - Exit");
             Console.WriteLine();
@@ -74,11 +74,11 @@ namespace bankOperations
             }
         }
 
-        private static void createAccount()
+        private static void CreateAccount()
         {
             Console.WriteLine("Create new account");
 
-            Console.WriteLine("Type 1 for checking account or 2 for savings account");
+            Console.WriteLine("Type 1 for natural person or 2 for legal person");
             int newAccountType = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Type the client's name");
@@ -103,6 +103,17 @@ namespace bankOperations
 
             Console.WriteLine("Account created");
             Console.WriteLine();
-        }   
+        }
+
+        private static void Deposit()
+        {
+            Console.WriteLine("Select the account you want to deposit on");
+            int acc = int.Parse(Console.ReadLine());
+            
+            Console.WriteLine("Type the value you wish to deposit");
+            double depositValue = int.Parse(Console.ReadLine());
+            
+            listAccounts[acc].deposit(depositValue);
+        }
     }
 }
